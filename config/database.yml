@@ -51,10 +51,10 @@ test:
   username: oluwafemi
   password: honour
 
-#production:
- # adapter: postgresql
-  #encoding: unicode
-  #database: transportation_system_production
-  #pool: 5
-  #username: transportation_system
-  #password:
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: transportation_system_production
+  pool: 5
+  username: transportation_system
+  password:
