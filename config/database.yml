@@ -13,14 +13,14 @@
 #
 # Configure Using Gemfile
 # gem 'pg'
-#
+#  bundle exec rake db:create:all
 development:
   adapter: postgresql
   encoding: unicode
   database: transportation_system_development
   pool: 5
-  username: transportation_system
-  password:
+  username: oluwafemi
+  password: honour
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -48,13 +48,13 @@ test:
   encoding: unicode
   database: transportation_system_test
   pool: 5
-  username: transportation_system
-  password:
+  username: oluwafemi
+  password: honour
 
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: transportation_system_production
-  pool: 5
-  username: transportation_system
-  password:
+#production:
+ # adapter: postgresql
+  #encoding: unicode
+  #database: transportation_system_production
+  #pool: 5
+  #username: transportation_system
+  #password:
