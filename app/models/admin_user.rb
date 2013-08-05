@@ -28,22 +28,6 @@ class AdminUser < ActiveRecord::Base
 
 end
 
+#rails generate active_admin:resource vehicle_driver
 
-#rails generate active_admin:resource vehicle_category
-#rails generate active_admin:resource vehicle
-#rails generate active_admin:resource vehicle_owner
-#rails generate active_admin:resource driver
 
-#The form below shows detailed info which will be from
-#1>> owner of vehicle
-#2>> Driver 1
-#3>> Driver 2
-#Details>> 
-#a. Full Name
-#b> house address
-#c> State of origin
-#D> Vehicle plate number
-#e>> Vehicle registration number
-#D>> driver license reg. no.
-#e>>  Vehicle route number/ info ( yaba to Victoria island)
-#f>> mobile and house phone number

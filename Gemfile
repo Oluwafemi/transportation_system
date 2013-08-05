@@ -12,6 +12,8 @@ gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
 #gem 'bootsrap-will_paginate', '0.0.9'
 gem 'bootstrap-will_paginate', :git => 'git://github.com/yrgoldteeth/bootstrap-will_paginate.git'
+#gem 'rails3-jquery-autocomplete'
+gem 'rails3-jquery-autocomplete', git: 'https://github.com/francisd/rails3-jquery-autocomplete'
 
 gem 'haml-rails'
 gem 'sass-rails', '4.0.0'
@@ -20,6 +22,7 @@ gem 'coffee-rails', '4.0.0' #'~> 4.0.0'
 gem 'jquery-rails', '3.0.0' # default has no version no
 gem 'turbolinks', '1.1.1'  # default has no version
 gem 'jbuilder', '1.0.2' #'~> 1.2'
+gem 'foreigner'
 
 gem 'devise',              github: 'plataformatec/devise'
 gem 'responders',          github: 'plataformatec/responders'

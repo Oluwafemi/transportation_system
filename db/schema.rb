@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130803151205) do
+ActiveRecord::Schema.define(version: 20130804201941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,5 +49,101 @@ ActiveRecord::Schema.define(version: 20130803151205) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vehicle_drivers", force: true do |t|
+    t.string   "surname"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "gender"
+    t.date     "birthday"
+    t.string   "driver_license_registration"
+    t.string   "email"
+    t.string   "mobile_one"
+    t.string   "mobile_two"
+    t.string   "home_address"
+    t.string   "state_of_origin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "vehicle_owners", force: true do |t|
+    t.string   "surname"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "gender"
+    t.date     "birthday"
+    t.string   "email"
+    t.string   "mobile_one"
+    t.string   "mobile_two"
+    t.string   "work_phone_one"
+    t.string   "work_phone_two"
+    t.string   "home_address"
+    t.string   "business_address"
+    t.string   "state_of_origin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vehicle_owners", ["surname", "first_name", "middle_name", "gender"], name: "vd_fullnames_gender_index", unique: true, using: :btree
+  add_index "vehicle_owners", ["surname", "first_name", "middle_name", "gender"], name: "vo_fullnames_gender_index", unique: true, using: :btree
+
+  create_table "vehicle_routes", force: true do |t|
+    t.string   "route_number"
+    t.string   "first_end"
+    t.string   "second_end"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vehicle_routes", ["first_end", "second_end"], name: "firstendsecondend", unique: true, using: :btree
+  add_index "vehicle_routes", ["route_number"], name: "routenumber", unique: true, using: :btree
+
+  create_table "vehicle_types", force: true do |t|
+    t.string   "type_name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vehicle_types", ["type_name"], name: "typename", unique: true, using: :btree
+
+  create_table "vehicle_vehicle_drivers", force: true do |t|
+    t.integer  "vehicle_id",        null: false
+    t.integer  "vehicle_driver_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vehicle_vehicle_drivers", ["vehicle_id", "vehicle_driver_id"], name: "v_v_d_index", unique: true, using: :btree
+
+  create_table "vehicle_vehicle_routes", force: true do |t|
+    t.integer  "vehicle_id",       null: false
+    t.integer  "vehicle_route_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vehicle_vehicle_routes", ["vehicle_id", "vehicle_route_id"], name: "v_v_r_index", unique: true, using: :btree
+
+  create_table "vehicles", force: true do |t|
+    t.string   "plate_number"
+    t.string   "pin_number"
+    t.integer  "vehicle_type_id",  null: false
+    t.integer  "vehicle_owner_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "vehicles", ["pin_number"], name: "pinnumber", unique: true, using: :btree
+  add_index "vehicles", ["plate_number"], name: "platenumber", unique: true, using: :btree
+
+  add_foreign_key "vehicle_vehicle_drivers", "vehicle_drivers", :name => "vehicle_vehicle_drivers_vehicle_driver_id_fk"
+  add_foreign_key "vehicle_vehicle_drivers", "vehicles", :name => "vehicle_vehicle_drivers_vehicle_id_fk"
+
+  add_foreign_key "vehicle_vehicle_routes", "vehicle_routes", :name => "vehicle_vehicle_routes_vehicle_route_id_fk"
+  add_foreign_key "vehicle_vehicle_routes", "vehicles", :name => "vehicle_vehicle_routes_vehicle_id_fk"
+
+  add_foreign_key "vehicles", "vehicle_owners", :name => "vehicles_vehicle_owner_id_fk"
+  add_foreign_key "vehicles", "vehicle_types", :name => "vehicles_vehicle_type_id_fk"
 
 end
