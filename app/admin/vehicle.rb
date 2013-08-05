@@ -19,13 +19,13 @@ ActiveAdmin.register Vehicle do
     end
 
 	form(:html => { :multipart => true} ) do |f|
-		f.inputs "Vehicle Details" do
+		f.inputs do
 			f.input :vehicle_type, :as => :autocomplete, :url => autocomplete_vehicle_vehicle_type_admin_vehicles_path
 			f.input :vehicle_owner, :as => :autocomplete, :url => autocomplete_vehicle_vehicle_owner_admin_vehicles_path
 			f.input :plate_number
 			f.input :pin_number
-			#f.input :vehicle_vehicle_driver
-			#f.input :vehicle_vehicle_route
+			#f.input :vehicle_drivers
+			f.input :current_routes, :as => :select, :multiple => true, :collection => VehicleRoute.all
 			f.buttons
 		end
 	end

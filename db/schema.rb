@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130804201941) do
+ActiveRecord::Schema.define(version: 20130805191922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20130804201941) do
     t.string   "state_of_origin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "full_name"
   end
 
   create_table "vehicle_owners", force: true do |t|
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 20130804201941) do
     t.string   "state_of_origin"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "full_name"
   end
 
   add_index "vehicle_owners", ["surname", "first_name", "middle_name", "gender"], name: "vd_fullnames_gender_index", unique: true, using: :btree
