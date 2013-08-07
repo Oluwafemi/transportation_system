@@ -48,7 +48,7 @@ ActiveAdmin.register VehicleDriver do
 			f.input :mobile_one
 			f.input :mobile_two
 			f.input :home_address
-			f.input :state_of_origin, :as => :select, :collection => ['Lagos', 'Ogun', 'Akwa Ibom', 'Sokoto']
+			f.input :state_of_origin, :as => :select, :collection => ApplicationController::STATES
 			
 			f.buttons
 		end
