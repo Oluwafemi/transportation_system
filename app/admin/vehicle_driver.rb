@@ -1,6 +1,11 @@
 ActiveAdmin.register VehicleDriver do
 
-	index do
+	def permitted_params
+        params.permit vehicle_driver: [:surname, :first_name, :middle_name, :full_name, :gender, :birthday,
+            :driver_license_registration, :email, :mobile_one, :mobile_two, :home_address, :state_of_origin]
+    end
+
+        index do
     	column :surname
     	column :first_name
     	column :middle_name

@@ -9,18 +9,6 @@ class VehicleOwner < ActiveRecord::Base
       	:email, :mobile_one, :mobile_two, :work_phone_one, :work_phone_two, :home_address, :business_address, :state_of_origin)
     end
 
-    def self.create_with_full_name(params)
-    	create(:surname => params[:surname], :first_name => params[:first_name], 
-    		:middle_name => params[:middle_name], :full_name => "#{params[:surname]} #{params[:first_name]} #{params[:middle_name]}", 
-    		:gender => params[:gender], :birthday => params[:birthday], :email => [:email], :mobile_one => params[:mobile_one],
-    		:mobile_two => params[:mobile_two], :work_phone_one => params[:work_phone_one], 
-    		:work_phone_two => params[:work_phone_two], :home_address => params[:home_address], 
-    		:business_address => params[:business_address], :state_of_origin => params[:state_of_origin])
-
-    end
-
-    # alias_attribute :name, :project_name 
-
     def name
         "#{surname} #{first_name} #{middle_name}"
     end
@@ -30,3 +18,13 @@ class VehicleOwner < ActiveRecord::Base
     end
 
 end
+
+#def self.create_with_full_name(params)
+    #   create(:surname => params[:surname], :first_name => params[:first_name], 
+    #       :middle_name => params[:middle_name], :full_name => "#{params[:surname]} #{params[:first_name]} #{params[:middle_name]}", 
+    #       :gender => params[:gender], :birthday => params[:birthday], :email => [:email], :mobile_one => params[:mobile_one],
+    #       :mobile_two => params[:mobile_two], :work_phone_one => params[:work_phone_one], 
+    #       :work_phone_two => params[:work_phone_two], :home_address => params[:home_address], 
+    #       :business_address => params[:business_address], :state_of_origin => params[:state_of_origin])
+#end
+# alias_attribute :name, :project_name 
