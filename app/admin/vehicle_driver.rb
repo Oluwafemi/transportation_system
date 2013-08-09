@@ -1,8 +1,6 @@
 ActiveAdmin.register VehicleDriver do
 
-	config.per_page = 30
-
-    index do
+	index do
     	column :surname
     	column :first_name
     	column :middle_name

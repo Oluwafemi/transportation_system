@@ -1,28 +1,26 @@
 ActiveAdmin.register VehicleOwner do
 
-	config.per_page = 30
-
-    controller do
+	controller do
 
         def permitted_params
             params.permit vehicle_owner: [:surname, :first_name, :middle_name, :full_name, :gender, :birthday,
                 :email, :mobile_one, :mobile_two, :work_phone_one, :work_phone_two, :home_address, :business_address, :state_of_origin]
         end
 
-        def create
+        #def create
             
-            vehicle_owner = VehicleOwner.create_with_full_name(params)
+         #   vehicle_owner = VehicleOwner.create(params)
 
-            if vehicle_owner.valid?
-                redirect_to :action => :index
-            else
-                redirect_to :action => :new
-            end
-        end
+          #  if vehicle_owner.valid?
+           #     redirect_to :action => :index
+           # else
+            #    redirect_to :action => :new
+            #end
+        #end
 
-        def update
+        #def update
             #
-        end
+        #end
 
     end
 
