@@ -19,19 +19,21 @@ ActiveAdmin.register Vehicle do
 
 	form do |f|  
 		f.inputs "Vehicle Details" do 
-			f.input :vehicle_type, :input_html => { :class => "chosen-input" }  #as: :chosen, create_option: true
-            #f.input :vehicle_owner, :input_html => { :class => "chosen-input" }   #as: :chosen, create_option: true
+			f.input :vehicle_type, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click'}  #as: :chosen, create_option: true
+            #f.input :vehicle_owner:, :input_html => { :class => "chosen-input" }   #as: :chosen, create_option: true
             f.input :vehicle_owner, :input_html => { :class => "chosen-input" }, :collection => VehicleOwner.available_vehicle_owners
             f.input :plate_number
 			f.input :pin_number
         end 
 
         f.inputs "Vehicle Routes" do  
-            f.input :vehicle_routes, :as => :select, :input_html => { :multiple => true }, :collection => VehicleRoute.all 
+            f.input :vehicle_routes, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click',
+            :multiple => true }, :collection => VehicleRoute.all 
         end 
 
         f.inputs "Vehicle Drivers" do  
-            f.input :vehicle_drivers, :as => :select, :input_html => { :multiple => true } , :collection => VehicleDriver.all
+            f.input :vehicle_drivers, :as => :select, :input_html => { :class => "chosen-input", :multiple => true } , 
+            :collection => VehicleDriver.available_vehicle_drivers
         end 
 
         f.actions
@@ -39,6 +41,9 @@ ActiveAdmin.register Vehicle do
   
 end
 
+#$(document).ready(function(){
+#   $(".chosen-input").chosen();
+#});
 #form(:html => { :multipart => true} ) do |f|
 #f.input :description, :input_html => { :rows => 10, :cols => 20 }  
 #f.has_many :vehicle_vehicle_routes do |v_route|

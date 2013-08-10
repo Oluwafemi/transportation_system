@@ -5,5 +5,5 @@
 //= require chosen.jquery.min
 
 $(document).ready(function(){
-   $(".chosen-input").chosen();
-});
+  $(".chzn-select").chosen({no_results_text: "<%= I18n.t(:no_results_text, :scope => :chozen) %>"});
+})

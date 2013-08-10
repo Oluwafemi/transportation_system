@@ -16,7 +16,7 @@ class VehicleDriver < ActiveRecord::Base
     end
 
     def self.available_vehicle_drivers
-        all.map { |driver| owner.name }
+        all.map { |driver| driver.name }
     end
 
 end

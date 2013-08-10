@@ -1,11 +1,16 @@
 ActiveAdmin.register VehicleDriver do
 
-	def permitted_params
-        params.permit vehicle_driver: [:surname, :first_name, :middle_name, :full_name, :gender, :birthday,
-            :driver_license_registration, :email, :mobile_one, :mobile_two, :home_address, :state_of_origin]
+	controller do
+
+        def permitted_params
+            params.permit vehicle_driver: [:surname, :first_name, :middle_name, :full_name, :gender, :birthday,
+                :driver_license_registration, :email, :mobile_one, :mobile_two, :home_address, :state_of_origin]
+        end
+
     end
 
-        index do
+
+    index do
     	column :surname
     	column :first_name
     	column :middle_name
@@ -44,7 +49,7 @@ ActiveAdmin.register VehicleDriver do
 			f.input :surname
 			f.input :first_name
 			f.input :middle_name
-			f.input :gender, :as => :select, :collection => ['MALE', 'FEMALE']
+			f.input :gender, :as => :select, :collection => ApplicationController::GENDER
 			f.input :birthday, :as => :date, :start_year => 1900, :end_year => Time.now.year - 5
 			f.input :driver_license_registration
 			f.input :email

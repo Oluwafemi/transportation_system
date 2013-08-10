@@ -64,7 +64,7 @@ ActiveAdmin.register VehicleOwner do
 			f.input :surname
 			f.input :first_name
 			f.input :middle_name
-			f.input :gender, :as => :select, :collection => ['MALE', 'FEMALE']
+			f.input :gender, :as => :select, :collection => ApplicationController::GENDER
 			f.input :birthday, :as => :date, :start_year => 1900, :end_year => Time.now.year - 5
 		    f.input :email
 			f.input :mobile_one
