@@ -22,3 +22,12 @@ class Vehicle < ActiveRecord::Base
     end
 
 end
+
+
+# goals 
+# -> we want to implement TRANSACTIONAL MESSAGING
+# -> choosing an SMS gateway provider for transactional messaging
+# -> choosing amongst connection options (SOAP, XML, FTP, HTTPS) for interfacing with the SMS gateway
+# -> Designing an infrastructure with ActiveRecord for storing SMS messages
+# ! scaling your app to send messages in bulk
+# -> receiving, parsing, and responding to transactional messages

@@ -1,4 +1,7 @@
 ActiveAdmin.register Vehicle do
+
+    actions :all, :except => [:destroy]
+    
 	#config.per_page = 30
 
     #controller do

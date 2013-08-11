@@ -24,7 +24,7 @@ gem 'turbolinks', '1.1.1'  # default has no version
 gem 'jbuilder', '1.0.2' #'~> 1.2'
 gem 'foreigner'
 #gem 'activeadmin-extra', github: 'stefanoverna/activeadmin-extra'
-gem 'chosen-rails', group: :assets
+gem 'chosen-rails'#, group: :assets
 
 gem 'devise',              github: 'plataformatec/devise'
 gem 'responders',          github: 'plataformatec/responders'

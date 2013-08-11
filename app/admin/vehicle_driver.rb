@@ -1,5 +1,7 @@
 ActiveAdmin.register VehicleDriver do
 
+    actions :all, :except => [:destroy]
+
 	controller do
 
         def permitted_params
@@ -17,6 +19,8 @@ ActiveAdmin.register VehicleDriver do
     	column :gender
     	column :driver_license_registration
     	column :state_of_origin
+        column :created_at
+        column :updated_at
 
     	default_actions
     end
@@ -33,7 +37,9 @@ ActiveAdmin.register VehicleDriver do
     	    row :mobile_one
     	    row :mobile_two
     	    row :home_address
-    	    row :state_of_origin 
+    	    row :state_of_origin
+            row :created_at
+            row :updated_at
     	end
     	active_admin_comments
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130805191922) do
+ActiveRecord::Schema.define(version: 20130811191337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,9 +95,13 @@ ActiveRecord::Schema.define(version: 20130805191922) do
     t.string   "second_end"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "full_route_name"
+    t.string   "reverse_route_name"
   end
 
   add_index "vehicle_routes", ["first_end", "second_end"], name: "firstendsecondend", unique: true, using: :btree
+  add_index "vehicle_routes", ["full_route_name"], name: "fullroutenameindex", unique: true, using: :btree
+  add_index "vehicle_routes", ["reverse_route_name"], name: "reverseroutenameindex", unique: true, using: :btree
   add_index "vehicle_routes", ["route_number"], name: "routenumber", unique: true, using: :btree
 
   create_table "vehicle_types", force: true do |t|

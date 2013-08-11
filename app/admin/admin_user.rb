@@ -4,7 +4,6 @@ ActiveAdmin.register AdminUser do
   
   show :title => :current_title do
     attributes_table do
-      row :id
       row :email
       row :sign_in_count
       row :current_sign_in_ip
