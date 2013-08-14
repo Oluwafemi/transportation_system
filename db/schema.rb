@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130811191337) do
+ActiveRecord::Schema.define(version: 20130813200501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,8 @@ ActiveRecord::Schema.define(version: 20130811191337) do
     t.string   "full_name"
   end
 
+  add_index "vehicle_drivers", ["full_name"], name: "driversfullnameindex", unique: true, using: :btree
+
   create_table "vehicle_owners", force: true do |t|
     t.string   "surname"
     t.string   "first_name"
@@ -86,6 +88,7 @@ ActiveRecord::Schema.define(version: 20130811191337) do
     t.string   "full_name"
   end
 
+  add_index "vehicle_owners", ["full_name"], name: "ownersfullnameindex", unique: true, using: :btree
   add_index "vehicle_owners", ["surname", "first_name", "middle_name", "gender"], name: "vd_fullnames_gender_index", unique: true, using: :btree
   add_index "vehicle_owners", ["surname", "first_name", "middle_name", "gender"], name: "vo_fullnames_gender_index", unique: true, using: :btree
 

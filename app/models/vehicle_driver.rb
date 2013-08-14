@@ -12,11 +12,15 @@ class VehicleDriver < ActiveRecord::Base
     end
 
     def name
-        "#{surname} #{first_name} #{middle_name}"
+        full_name
     end
 
     def self.available_vehicle_drivers
         all.map { |driver| driver.name }
+    end
+
+    def self.driver_id(full_name)
+        id = where(:full_name => full_name)[0].id
     end
 
 end

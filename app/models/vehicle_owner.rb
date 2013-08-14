@@ -10,11 +10,15 @@ class VehicleOwner < ActiveRecord::Base
     end
 
     def name
-        "#{surname} #{first_name} #{middle_name}"
+        full_name
     end
 
     def self.available_vehicle_owners
         all.map { |owner| owner.name }
+    end
+
+    def self.owner_id(full_name)
+        id = where(:full_name => full_name)[0].id
     end
 
 end

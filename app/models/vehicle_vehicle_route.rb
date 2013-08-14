@@ -4,7 +4,7 @@ class VehicleVehicleRoute < ActiveRecord::Base
 
 	validates :vehicle_id, :vehicle_route_id, :presence => true
 
-	def vehicle_type_params
+	def vehicle_vehicle_route_params
 		params.require(:vehicle_vehicle_route).permit(:vehicle_id, :vehicle_route_id)
     end
 end

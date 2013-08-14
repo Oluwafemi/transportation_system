@@ -14,6 +14,7 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', :git => 'git://github.com/yrgoldteeth/bootstrap-will_paginate.git'
 #gem 'rails3-jquery-autocomplete'
 gem 'rails3-jquery-autocomplete', git: 'https://github.com/francisd/rails3-jquery-autocomplete'
+gem 'compass-rails', github: 'milgner/compass-rails', branch: 'rails4'
 
 gem 'haml-rails'
 gem 'sass-rails', '4.0.0'
@@ -29,7 +30,7 @@ gem 'chosen-rails'#, group: :assets
 gem 'devise',              github: 'plataformatec/devise'
 gem 'responders',          github: 'plataformatec/responders'
 gem 'inherited_resources', github: 'josevalim/inherited_resources'
-gem 'ransack',             github: 'ernie/ransack',            branch: 'rails-4'
+gem 'ransack'#,             github: 'ernie/ransack',            branch: 'rails-4'
 gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
 gem 'formtastic',          github: 'justinfrench/formtastic'
 
