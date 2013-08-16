@@ -18,7 +18,7 @@ class Vehicle < ActiveRecord::Base
     end
 
 	def name
-    	"#{vehicle.plate_number} - #{vehicle.pin_number}" 
+    	"#{plate_number} - #{pin_number}" 
     end
 
 end

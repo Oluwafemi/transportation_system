@@ -26,9 +26,31 @@ ActiveAdmin.register VehicleRoute do
     controller do
     
         def permitted_params
-            params.permit vehicle_route: [:route_number, :first_end, :second_end]
+            params.permit vehicle_route: [:route_number, :first_end, :second_end, :full_route_name, :reverse_route_name]
         end
 
+        def create
+            params[:vehicle_route][:full_route_name] = "#{params[:vehicle_route][:first_end]} / #{params[:vehicle_route][:second_end]}"
+            params[:vehicle_route][:reverse_route_name] = "#{params[:vehicle_route][:second_end]} / #{params[:vehicle_route][:first_end]}"
+            super
+        end
+
+        def update
+            params[:vehicle_route][:full_route_name] = "#{params[:vehicle_route][:first_end]} / #{params[:vehicle_route][:second_end]}"
+            params[:vehicle_route][:reverse_route_name] = "#{params[:vehicle_route][:second_end]} / #{params[:vehicle_route][:first_end]}"
+            super
+        end
+
+    end
+
+    form do |f|
+        f.inputs do
+            f.input :route_number
+            f.input :first_end
+            f.input :second_end
+            
+            f.buttons
+        end
     end
 
 end

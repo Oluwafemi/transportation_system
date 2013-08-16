@@ -9,6 +9,16 @@ ActiveAdmin.register VehicleDriver do
                 :driver_license_registration, :email, :mobile_one, :mobile_two, :home_address, :state_of_origin]
         end
 
+        def create
+            params[:vehicle_driver][:full_name] = "#{params[:vehicle_driver][:surname]} #{params[:vehicle_driver][:first_name]} #{params[:vehicle_driver][:middle_name]}"
+            super
+        end
+
+        def update
+            params[:vehicle_driver][:full_name] = "#{params[:vehicle_driver][:surname]} #{params[:vehicle_driver][:first_name]} #{params[:vehicle_driver][:middle_name]}"
+            super
+        end
+
     end
 
 
@@ -56,7 +66,7 @@ ActiveAdmin.register VehicleDriver do
 			f.input :first_name
 			f.input :middle_name
 			f.input :gender, :as => :select, :collection => ApplicationController::GENDER
-			f.input :birthday, :as => :date, :start_year => 1900, :end_year => Time.now.year - 5
+			f.input :birthday, :as => :date_select, :start_year => 1900, :end_year => Time.now.year - 5
 			f.input :driver_license_registration
 			f.input :email
 			f.input :mobile_one

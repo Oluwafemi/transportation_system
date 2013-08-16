@@ -24,31 +24,47 @@ ActiveAdmin.register Vehicle do
         end
 
         def create
-            vehicle_params = params[:vehicle]
-            vehicle = Vehicle.create!(:vehicle_type_id => vehicle_params[:vehicle_type_id], :vehicle_owner_id => vehicle_params[:vehicle_owner_id],
-                :plate_number => vehicle_params[:plate_number], :pin_number => vehicle_params[:pin_number])            
-            if vehicle.valid?
-                v_v_routes = vehicle_params[:vehicle_route_ids]
-                v_v_routes.each do |id|
-                    if id != ''
-                        VehicleVehicleRoute.create!(:vehicle_id => vehicle.id, :vehicle_route_id => id.to_i)
-                    end
-                end
+            vehicle_rt_ids = params[:vehicle][:vehicle_route_ids]
+            vehicle_rt_ids = vehicle_rt_ids - ['']
+            params[:vehicle][:vehicle_route_ids] = vehicle_rt_ids
 
-                v_v_drivers = vehicle_params[:vehicle_driver_ids]
-                v_v_drivers.each do |id|
-                    if id != ''
-                        VehicleVehicleDriver.create!(:vehicle_id => vehicle.id, :vehicle_driver_id => id.to_i)
-                    end
-                end
+            vehicle_dr_ids = params[:vehicle][:vehicle_driver_ids]
+            vehicle_dr_ids = vehicle_dr_ids - ['']
+            params[:vehicle][:vehicle_driver_ids] = vehicle_dr_ids
 
-                redirect_to :action => :index
-            else
-                redirect_to :action => :new
-            end
+            puts "PARAMS"
+            puts params
+
+            super
 
         end
 
+        def update
+            vehicle_rt_ids = params[:vehicle][:vehicle_route_ids]
+            vehicle_rt_ids = vehicle_rt_ids - ['']
+            params[:vehicle][:vehicle_route_ids] = vehicle_rt_ids
+
+            vehicle_dr_ids = params[:vehicle][:vehicle_driver_ids]
+            vehicle_dr_ids = vehicle_dr_ids - ['']
+            params[:vehicle][:vehicle_driver_ids] = vehicle_dr_ids
+
+            puts "PARAMS"
+            puts params
+
+            super
+            
+        end
+
+    end
+
+    show do
+        attributes_table do
+            row :vehicle_type
+            row :vehicle_owner
+            row :plate_number
+            row :pin_number
+        end
+        active_admin_comments
     end
 
 	form do |f|  

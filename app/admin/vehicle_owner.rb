@@ -9,20 +9,15 @@ ActiveAdmin.register VehicleOwner do
                 :email, :mobile_one, :mobile_two, :work_phone_one, :work_phone_two, :home_address, :business_address, :state_of_origin]
         end
 
-        #def create
-            
-         #   vehicle_owner = VehicleOwner.create(params)
+        def create
+            params[:vehicle_owner][:full_name] = "#{params[:vehicle_owner][:surname]} #{params[:vehicle_owner][:first_name]} #{params[:vehicle_owner][:middle_name]}"
+            super
+        end
 
-          #  if vehicle_owner.valid?
-           #     redirect_to :action => :index
-           # else
-            #    redirect_to :action => :new
-            #end
-        #end
-
-        #def update
-            #
-        #end
+        def update
+            params[:vehicle_owner][:full_name] = "#{params[:vehicle_owner][:surname]} #{params[:vehicle_owner][:first_name]} #{params[:vehicle_owner][:middle_name]}"
+            super
+        end
 
     end
 
@@ -71,7 +66,7 @@ ActiveAdmin.register VehicleOwner do
 			f.input :first_name
 			f.input :middle_name
 			f.input :gender, :as => :select, :collection => ApplicationController::GENDER
-			f.input :birthday, :as => :date, :start_year => 1900, :end_year => Time.now.year - 5
+			f.input :birthday, :as => :date_select, :start_year => 1900, :end_year => Time.now.year - 5
 		    f.input :email
 			f.input :mobile_one
 			f.input :mobile_two
