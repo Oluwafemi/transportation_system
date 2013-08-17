@@ -33,6 +33,14 @@ ActiveAdmin.register VehicleOwner do
     	default_actions
     end
 
+    filter :surname
+    filter :first_name
+    filter :middle_name
+    filter :gender
+    filter :state_of_origin
+    filter :created_at
+    filter :updated_at
+
     show do
     	attributes_table do
     		row :surname
@@ -50,17 +58,14 @@ ActiveAdmin.register VehicleOwner do
     	    row :state_of_origin
             row :created_at
             row :updated_at
+            row 'Vehicles' do |vehicle|
+                vehicle_owner.vehicles.map(&:descriptive_name).join("<br />").html_safe
+            end
     	end
     	active_admin_comments
     end
 
-    filter :surname
-    filter :first_name
-    filter :middle_name
-    filter :gender
-    filter :state_of_origin
-
-	form do |f|
+    form do |f|
 		f.inputs do
 			f.input :surname
 			f.input :first_name
@@ -81,4 +86,3 @@ ActiveAdmin.register VehicleOwner do
 	end
 
 end
-

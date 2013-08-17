@@ -11,7 +11,7 @@ class VehicleRoute < ActiveRecord::Base
     end
 
     def name
-    	"#{first_end} - #{second_end}"
+    	full_route_name
     end
 
 end

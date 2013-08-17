@@ -13,21 +13,16 @@ class Vehicle < ActiveRecord::Base
 
 	validates :plate_number, :pin_number, :vehicle_type_id, :vehicle_owner_id, :presence => true	
 
-	def vehicle_params 
-      params.require(:vehicle).permit(:plate_number, :pin_number, :vehicle_type_id, :vehicle_owner_id)
+	def vehicle_params
+		params.require(:vehicle).permit(:plate_number, :pin_number, :vehicle_type_id, :vehicle_owner_id, :vehicle_route_ids => [], :vehicle_driver_ids => [])
     end
 
 	def name
     	"#{plate_number} - #{pin_number}" 
     end
 
+    def descriptive_name
+    	"Plate # #{plate_number} - Pin # #{pin_number} - (#{vehicle_type.name})" 
+    end
+
 end
-
-
-# goals 
-# -> we want to implement TRANSACTIONAL MESSAGING
-# -> choosing an SMS gateway provider for transactional messaging
-# -> choosing amongst connection options (SOAP, XML, FTP, HTTPS) for interfacing with the SMS gateway
-# -> Designing an infrastructure with ActiveRecord for storing SMS messages
-# ! scaling your app to send messages in bulk
-# -> receiving, parsing, and responding to transactional messages
