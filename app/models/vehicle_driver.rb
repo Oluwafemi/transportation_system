@@ -5,6 +5,7 @@ class VehicleDriver < ActiveRecord::Base
 	accepts_nested_attributes_for :vehicle_vehicle_drivers
 
 	validates :surname, :first_name, :middle_name, :gender, :birthday, :driver_license_registration, :mobile_one, :home_address, :state_of_origin, :presence => true
+    #validates_format_of :email, :with  => ApplicationController::EMAIL_REGEXP, :allow_blank => true
 
     def vehicle_driver_params 
       params.require(:vehicle_driver).permit(:surname, :first_name, :middle_name, :full_name, :gender, :birthday,
