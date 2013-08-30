@@ -1,0 +1,21 @@
+= semantic_form_for [:admin, @vehicle], :html => { :multipart => true} do |f|
+    -# = render 'shared/error_messages', object: f.object
+    = javascript_tag "var vehicle_type_suggestions = #{ @vehicle_type_suggetions.to_json }; "
+    = javascript_tag "var vehicle_owner_suggestions = #{ @vehicle_owner_suggetions.to_json }; "
+    :javascript
+        $(document).ready(function() {
+            $('#vehicle_vehicle_type_id').typeahead({ local: vehicle_type_suggestions });
+            $('#vehicle_vehicle_owner_id').typeahead({ local: vehicle_owner_suggestions });
+        });
+    = f.inputs do
+        = f.input :vehicle_type, :as => :string, :input_html => { :id => 'vehicle_vehicle_type_id' } 
+        = f.input :vehicle_owner, :as => :string, :input_html => { :id => 'vehicle_vehicle_owner_id' } 
+        = f.input :plate_number
+        = f.input :pin_number
+    = f.inputs "Vehicle Routes" do  
+        = f.input :vehicle_routes, :as => :select, :blank => false, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click',
+            :multiple => true }, :collection => VehicleRoute.all 
+    = f.inputs "Vehicle Drivers" do  
+        = f.input :vehicle_drivers, :as => :select, :blank => false, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click',
+            :multiple => true }, :collection => VehicleDriver.all
+    = f.actions

@@ -100,3 +100,18 @@ ActiveAdmin.register AdminUser do
   end
 
 end
+
+# put this inside active_admin.css.scss
+#/*
+#   *= require chosen
+#*/
+
+#//= require autocomplete-rails
+
+#//= require chosen.jquery.min
+
+#$(document).ready(function(){
+#  $(".chzn-select").chosen({no_results_text: "<%= I18n.t(:no_results_text, :scope => :chozen) %>"});
+#})
+
+#@import "chosen"; inside active_admin.css.scss

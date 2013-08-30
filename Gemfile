@@ -5,15 +5,12 @@ ruby '2.0.0'
 gem 'rails', '4.0.0'
 gem 'pg'
 
-#gem 'bootstrap-saas', '2.3.2.0'
 gem 'bootstrap-sass', '~> 2.3.2.1'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
-#gem 'bootsrap-will_paginate', '0.0.9'
 gem 'bootstrap-will_paginate', :git => 'git://github.com/yrgoldteeth/bootstrap-will_paginate.git'
-#gem 'rails3-jquery-autocomplete'
-gem 'rails3-jquery-autocomplete', git: 'https://github.com/francisd/rails3-jquery-autocomplete'
+gem 'twitter-typeahead-rails', :git => "git://github.com/yourabi/twitter-typeahead-rails.git"
 gem 'compass-rails', github: 'milgner/compass-rails', branch: 'rails4'
 
 gem 'haml-rails'
@@ -24,7 +21,6 @@ gem 'jquery-rails', '3.0.0' # default has no version no
 gem 'turbolinks', '1.1.1'  # default has no version
 gem 'jbuilder', '1.0.2' #'~> 1.2'
 gem 'foreigner'
-#gem 'activeadmin-extra', github: 'stefanoverna/activeadmin-extra'
 gem 'chosen-rails'#, group: :assets
 
 gem 'devise',              github: 'plataformatec/devise'
@@ -33,6 +29,9 @@ gem 'inherited_resources', github: 'josevalim/inherited_resources'
 gem 'ransack'#,             github: 'ernie/ransack',            branch: 'rails-4'
 gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
 gem 'formtastic',          github: 'justinfrench/formtastic'
+
+gem 'rabl'
+gem 'oj'
 
 group :development, :test do
 	gem 'rspec-rails', '2.13.1'
@@ -59,6 +58,10 @@ end
 group :production do
 	gem 'rails_12factor', '0.0.2'
 end
+
+#gem 'bootstrap-saas', '2.3.2.0'
+#gem 'activeadmin-extra', github: 'stefanoverna/activeadmin-extra'
+#gem 'bootsrap-will_paginate', '0.0.9'
 
 # Use postgresql as the database for Active Record
 

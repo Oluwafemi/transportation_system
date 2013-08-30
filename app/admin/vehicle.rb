@@ -1,12 +1,31 @@
 ActiveAdmin.register Vehicle do
 
     actions :all, :except => [:destroy]
+
+    form :partial => 'form'
     
 	controller do
     
         def permitted_params
         	params.permit vehicle: [:plate_number, :pin_number, :vehicle_type_id, :vehicle_owner_id, 
                 :vehicle_route_ids => [], :vehicle_driver_ids => []]
+        end
+
+        def vehicle_driver_suggestions
+            @suggestions = VehicleDriver.where('full_name LIKE ?', "#{params[:term]}%")
+            render json: @suggestions
+        end
+
+        def new
+            @vehicle_type_suggetions = []
+            all = VehicleType.all
+            all.map { |type| @vehicle_type_suggetions << type.type_name }
+            
+            @vehicle_owner_suggetions = []
+            all = VehicleOwner.all
+            all.map { |owner| @vehicle_owner_suggetions << owner.full_name }
+
+            super
         end
 
         def create
@@ -65,27 +84,6 @@ ActiveAdmin.register Vehicle do
         end
         active_admin_comments
     end
-
-    form do |f|  
-		f.inputs "Vehicle Details" do 
-			f.input :vehicle_type, :as => :select, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click'}  #as: :chosen, create_option: true
-            f.input :vehicle_owner, :input_html => { :class => "chosen-input" }, :collection => VehicleOwner.all
-            f.input :plate_number
-			f.input :pin_number
-        end 
-
-        f.inputs "Vehicle Routes" do  
-            f.input :vehicle_routes, :as => :select, :blank => false, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click',
-            :multiple => true }, :collection => VehicleRoute.all 
-        end 
-
-        f.inputs "Vehicle Drivers" do  
-            f.input :vehicle_drivers, :as => :select, :blank => false, :input_html => { :class => 'chzn-select', :width => 'auto', "data-placeholder" => 'Click',
-            :multiple => true }, :collection => VehicleDriver.all
-        end 
-
-        f.actions
-    end
   
 end
-
+        
