@@ -7,4 +7,5 @@ class VehicleVehicleDriver < ActiveRecord::Base
 	def vehicle_vehicle_driver_params 
       params.require(:vehicle_vehicle_driver).permit(:vehicle_id, :vehicle_driver_id)
     end
+    
 end

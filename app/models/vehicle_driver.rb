@@ -21,7 +21,11 @@ class VehicleDriver < ActiveRecord::Base
     end
 
     def self.driver_id(full_name)
-        id = where(:full_name => full_name)[0].id
+        rel = where('full_name = ?', full_name)
+
+        return nil if rel.empty?
+
+        return rel[0].id
     end
 
 end

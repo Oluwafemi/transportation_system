@@ -16,21 +16,24 @@ ActiveAdmin.register Vehicle do
             render json: @suggestions
         end
 
-        def new
-            @vehicle_type_suggetions = []
-            all = VehicleType.all
-            all.map { |type| @vehicle_type_suggetions << type.type_name }
+        #def edit
+            #@vehicle_type_suggetions = []
+            #all = VehicleType.all
+            #all.map { |type| @vehicle_type_suggetions << type.type_name }
             
-            @vehicle_owner_suggetions = []
-            all = VehicleOwner.all
-            all.map { |owner| @vehicle_owner_suggetions << owner.full_name }
+            #@vehicle_owner_suggetions = []
+            #all = VehicleOwner.all
+            #all.map { |owner| @vehicle_owner_suggetions << owner.full_name }
 
-            super
-        end
+            #super
+        #end
 
         def create
-            vehicle = Vehicle.create(:vehicle_type_id => params[:vehicle][:vehicle_type_id], :vehicle_owner_id => params[:vehicle][:vehicle_owner_id],
-            :plate_number => params[:vehicle][:plate_number], :pin_number => params[:vehicle][:pin_number])
+            params[:vehicle][:vehicle_type_id] = VehicleType.type_id(params[:vehicle][:vehicle_type_id])
+            params[:vehicle][:vehicle_owner_id] = VehicleOwner.owner_id(params[:vehicle][:vehicle_owner_id])
+
+            vehicle = Vehicle.create(:vehicle_type_id => params[:vehicle_type_id], :vehicle_owner_id => params[:vehicle_owner_id],
+                :plate_number => params[:vehicle][:plate_number], :pin_number => params[:vehicle][:pin_number])
 
             if vehicle.valid?
                 vehicle_route_ids = params[:vehicle][:vehicle_route_ids] - ['']

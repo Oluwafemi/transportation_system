@@ -10,4 +10,20 @@ class VehicleType < ActiveRecord::Base
     def name
     	type_name
     end
+
+    def to_s
+    	type_name
+    end
+
+    def self.type_id(v_type_name)
+        rel = where('type_name = ?', v_type_name)
+
+        return nil if rel.empty?
+
+        return rel[0].id
+    end
+
+    def self.vehicle_type_suggestions 
+	    all.map { |type| type.type_name }
+	end
 end
