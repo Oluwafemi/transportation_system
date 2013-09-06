@@ -23,7 +23,7 @@ class VehicleType < ActiveRecord::Base
         return rel[0].id
     end
 
-    def self.vehicle_type_suggestions 
-	    all.map { |type| type.type_name }
+    def self.vehicle_type_suggestions(search_by)
+	    where('type_name LIKE ?', "#{search_by}%")
 	end
 end

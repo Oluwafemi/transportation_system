@@ -30,6 +30,10 @@ class VehicleOwner < ActiveRecord::Base
         return rel[0].id
     end
 
+    def self.vehicle_owner_suggestions(search_by)
+        where('full_name LIKE ?', "#{search_by}%")
+    end
+
 end
 
 #def self.create_with_full_name(params)

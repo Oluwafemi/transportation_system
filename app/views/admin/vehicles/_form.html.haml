@@ -1,14 +1,55 @@
 = semantic_form_for [:admin, @vehicle], :html => { :multipart => true} do |f|
-    = javascript_tag "var vehicle_type_suggestions = #{ VehicleType.vehicle_type_suggestions.to_json }; "
-    = javascript_tag "var vehicle_owner_suggestions = #{ VehicleOwner.available_vehicle_owners.to_json }; "
+    = javascript_include_tag "bootstrap-typeahead"
+    = stylesheet_link_tag "bootstrap-typeahead"
     :javascript
+        var vehicle_type_typeahead_labels
+        var vehicle_type_typeahead_mapped
+        var vehicle_owner_typeahead_labels
+        var vehicle_owner_typeahead_mapped
         $(document).ready(function() {
-            $('.vehicle_type').typeahead({ local: vehicle_type_suggestions });
-            $('.vehicle_owner').typeahead({ local: vehicle_owner_suggestions });
+            $('.vehicle-type-typeahead').typeahead({ 
+                source: function (query, process) {
+                    $.getJSON("#{admin_vehicle_types_vehicle_type_suggestions_path}", { search: query }, function (data) {
+                        vehicle_type_typeahead_labels = []
+                        vehicle_type_typeahead_mapped = {}
+
+                        $.each(data, function (i, item) {
+                            var vehicle_type_name_and_id = item.type_name + " - " + item.id
+                            vehicle_type_typeahead_mapped[vehicle_type_name_and_id] = item.id
+                            vehicle_type_typeahead_labels.push(vehicle_type_name_and_id)
+                         })
+
+                        process(vehicle_type_typeahead_labels)
+                    })
+                },
+                updater: function (item) {
+                    return vehicle_type_typeahead_mapped[item]
+                }
+             })
+
+            $('.vehicle-owner-typeahead').typeahead({ 
+                source: function (query, process) {
+                    $.getJSON("#{admin_vehicle_owners_vehicle_owner_suggestions_path}", { search: query }, function (data) {
+                        vehicle_owner_typeahead_labels = []
+                        vehicle_owner_typeahead_mapped = {}
+
+                        $.each(data, function (i, item) {
+                            var vehicle_owner_full_name_and_id = item.full_name + " - " + item.id
+                            vehicle_owner_typeahead_mapped[vehicle_owner_full_name_and_id] = item.id
+                            vehicle_owner_typeahead_labels.push(vehicle_owner_full_name_and_id)
+                         })
+
+                        process(vehicle_owner_typeahead_labels)
+                    })
+                },
+                updater: function (item) {
+                    return vehicle_owner_typeahead_mapped[item]
+                }
+             })
         });
     = f.inputs do
-        = f.input :vehicle_type, :as => :string, :input_html => { :class => 'vehicle_type' } 
-        = f.input :vehicle_owner, :as => :string, :input_html => { :class => 'vehicle_owner' } 
+        = f.input :vehicle_type, :input_html => { :class => 'input-small vehicle-type-typeahead vehicle-type-input', :autocomplete => "off" } 
+        = f.input :vehicle_owner, :input_html => { :class => 'input-small vehicle-owner-typeahead vehicle-owner-input', :autocomplete => "off" } 
         = f.input :plate_number
         = f.input :pin_number
     = f.inputs "Vehicle Routes" do  

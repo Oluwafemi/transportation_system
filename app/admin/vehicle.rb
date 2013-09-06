@@ -11,9 +11,19 @@ ActiveAdmin.register Vehicle do
                 :vehicle_route_ids => [], :vehicle_driver_ids => []]
         end
 
-        def vehicle_driver_suggestions
-            @suggestions = VehicleDriver.where('full_name LIKE ?', "#{params[:term]}%")
-            render json: @suggestions
+        def vehicle_owner_suggestions
+            @suggestions = VehicleOwner.vehicle_owner_suggestions(params[:search])
+            #render json: @suggestions
+            respond_to do |format|
+                format.json { render :json => @suggestions.as_json(:only => [:full_name, :id])}
+            end
+        end
+
+        def vehicle_type_suggestions
+            @suggestions = VehicleType.vehicle_type_suggestions(params[:search])
+            respond_to do |format|
+                format.json { render :json => @suggestions.as_json(:only => [:type_name, :id])}
+            end
         end
 
         #def edit
@@ -29,10 +39,7 @@ ActiveAdmin.register Vehicle do
         #end
 
         def create
-            params[:vehicle][:vehicle_type_id] = VehicleType.type_id(params[:vehicle][:vehicle_type_id])
-            params[:vehicle][:vehicle_owner_id] = VehicleOwner.owner_id(params[:vehicle][:vehicle_owner_id])
-
-            vehicle = Vehicle.create(:vehicle_type_id => params[:vehicle_type_id], :vehicle_owner_id => params[:vehicle_owner_id],
+            vehicle = Vehicle.create(:vehicle_type_id => params[:vehicle][:vehicle_type_id], :vehicle_owner_id => params[:vehicle][:vehicle_owner_id],
                 :plate_number => params[:vehicle][:plate_number], :pin_number => params[:vehicle][:pin_number])
 
             if vehicle.valid?

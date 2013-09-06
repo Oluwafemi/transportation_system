@@ -9,6 +9,10 @@ TransportationSystem::Application.routes.draw do
 
   root to: "admin/dashboard#index"
 
+  get 'admin/vehicle_owners/vehicle_owner_suggestions', :to => 'admin/vehicles#vehicle_owner_suggestions'
+
+  get 'admin/vehicle_types/vehicle_type_suggestions', :to => 'admin/vehicles#vehicle_type_suggestions'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
