@@ -33,6 +33,7 @@ gem 'formtastic',          github: 'justinfrench/formtastic'
 
 gem 'rabl'
 gem 'oj'
+gem 'rest-client'
 
 group :development, :test do
 	gem 'rspec-rails', '2.13.1'
